@@ -1,5 +1,9 @@
 package com.demo.paymentsdemo.service;
 
-public class StudentService {
+import com.demo.paymentsdemo.entity.Student;
+
+public interface StudentService {
+
+    Student getStudent(String name);
     
 }
