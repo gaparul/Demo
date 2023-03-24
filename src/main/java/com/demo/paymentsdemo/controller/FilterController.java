@@ -6,10 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.paymentsdemo.entity.Student;
 import com.demo.paymentsdemo.service.StudentService;
+import java.util.List;
 
 import lombok.*;
 
@@ -18,13 +20,26 @@ import lombok.*;
 @RequestMapping("/filter")
 public class FilterController {
 
-    @Autowired
     StudentService studentService;
 
     @GetMapping("/{name}")
-    public ResponseEntity<Student> getStudent(@PathVariable String name)
+    public ResponseEntity<Student> getStudentByName(@PathVariable String name)
     {
-        return new ResponseEntity<>(studentService.getStudent(name),HttpStatus.OK);
+        return new ResponseEntity<>(studentService.getStudentByName(name),HttpStatus.OK);
     }
+
+    @GetMapping("ID/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(studentService.getStudent(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Student>> getStudents()
+    {
+        return new ResponseEntity<>(studentService.getStudents(),HttpStatus.OK);
+    }
+    
+
     
 }

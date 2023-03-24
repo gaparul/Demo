@@ -6,5 +6,5 @@ import com.demo.paymentsdemo.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long>
 {
-    Student findByStudentName(String name);
+    Student findByName(String name);
 }
