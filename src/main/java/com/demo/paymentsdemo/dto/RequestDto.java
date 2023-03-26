@@ -10,5 +10,10 @@ import lombok.Setter;
 public class RequestDto {
 
     private List<SearchRequestDto> searchRequestDto;
+    private GlobalOperator globalOperator;
+
+    public enum GlobalOperator{
+        AND,OR;
+    } 
     
 }

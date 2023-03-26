@@ -8,6 +8,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import com.demo.paymentsdemo.dto.SearchRequestDto;
+import com.demo.paymentsdemo.dto.RequestDto.GlobalOperator;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -33,7 +34,7 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
     }
 
     @Override
-    public Specification<T> getSearchSpecification(List<SearchRequestDto> searchRequestDtos) {
+    public Specification<T> getSearchSpecification(List<SearchRequestDto> searchRequestDtos, GlobalOperator globalOperator) {
         
         return new Specification<T>(){
 
@@ -47,7 +48,13 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                     Predicate equal = criteriaBuilder.equal(root.get(it.getColumn()), it.getValue());
                     predicates.add(equal);
                 }
-                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+                if(globalOperator.equals(GlobalOperator.AND)){
+                    return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+                }
+                else{
+                    return criteriaBuilder.or(predicates.toArray(new Predicate[0]));
+                }
+                
             }
         
         };

@@ -57,7 +57,7 @@ public class FilterController {
     @PostMapping("/dynamicspecification")
     public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody RequestDto requestDto)
     {
-        Specification<Student> searchSpecification = studentFilterSpecification.getSearchSpecification(requestDto.getSearchRequestDto());
+        Specification<Student> searchSpecification = studentFilterSpecification.getSearchSpecification(requestDto.getSearchRequestDto(),requestDto.getGlobalOperator());
         return new ResponseEntity<>(studentRepository.findAll(searchSpecification),HttpStatus.OK);
     }    
 }
