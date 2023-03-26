@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.paymentsdemo.entity.Student;
+import com.demo.paymentsdemo.service.FilterSpecification;
 import com.demo.paymentsdemo.service.StudentService;
 import java.util.List;
 
 import lombok.*;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 @AllArgsConstructor
 @RestController
@@ -20,6 +24,7 @@ import lombok.*;
 public class FilterController {
 
     StudentService studentService;
+    FilterSpecification<Student> studentFilterSpecification;
 
     @GetMapping("/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name)
@@ -44,6 +49,14 @@ public class FilterController {
     {
         return new ResponseEntity<>(studentService.getStudentsSpecification(),HttpStatus.OK);
     }
+
+    @PostMapping("/dynamicspecification")
+    public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody com.demo.paymentsdemo.dto.RequestDto RequestDto)
+    {
+        
+    }
+    
+    
     
 
     
