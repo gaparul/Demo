@@ -1,6 +1,7 @@
 package com.demo.paymentsdemo.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -55,6 +56,12 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                         case LIKE:
                             Predicate like = criteriaBuilder.like(root.get(it.getColumn()), "%" + it.getValue() + "%");
                             predicates.add(like);
+                            break;
+
+                        case IN:
+                            String[] split = it.getValue().split(",");
+                            Predicate in = root.get(it.getColumn()).in(Arrays.asList(split));
+                            predicates.add(in);
                             break;
                         
                         default:

@@ -13,7 +13,7 @@ public class SearchRequestDto {
 
     public enum Operation
     {
-        EQUAL,LIKE;
+        EQUAL,LIKE,IN;
     }
     
 }
