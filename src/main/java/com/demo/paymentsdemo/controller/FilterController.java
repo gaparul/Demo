@@ -1,14 +1,18 @@
 package com.demo.paymentsdemo.controller;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.paymentsdemo.dto.RequestDto;
 import com.demo.paymentsdemo.entity.Student;
+import com.demo.paymentsdemo.repository.StudentRepository;
 import com.demo.paymentsdemo.service.FilterSpecification;
 import com.demo.paymentsdemo.service.StudentService;
 import java.util.List;
@@ -24,6 +28,7 @@ public class FilterController {
 
     StudentService studentService;
     FilterSpecification<Student> studentFilterSpecification;
+    StudentRepository studentRepository;
 
     @GetMapping("/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name)
@@ -49,11 +54,13 @@ public class FilterController {
         return new ResponseEntity<>(studentService.getStudentsSpecification(),HttpStatus.OK);
     }
 
-    // @PostMapping("/dynamicspecification")
-    // public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody com.demo.paymentsdemo.dto.RequestDto RequestDto)
-    // {
-        
-    // }
+    @PostMapping("/dynamicspecification")
+    public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody RequestDto requestDto)
+    {
+        Specification<Student> searchSpecification = studentFilterSpecification.getSearchSpecification(requestDto.getSearchRequestDto());
+        return new ResponseEntity<>(studentRepository.findAll(searchSpecification),HttpStatus.OK);
+    
+    }
     
     
     
