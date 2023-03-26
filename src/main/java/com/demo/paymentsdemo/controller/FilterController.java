@@ -14,7 +14,6 @@ import com.demo.paymentsdemo.service.StudentService;
 import java.util.List;
 
 import lombok.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -50,11 +49,11 @@ public class FilterController {
         return new ResponseEntity<>(studentService.getStudentsSpecification(),HttpStatus.OK);
     }
 
-    @PostMapping("/dynamicspecification")
-    public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody com.demo.paymentsdemo.dto.RequestDto RequestDto)
-    {
+    // @PostMapping("/dynamicspecification")
+    // public ResponseEntity<List<Student>> getSearchSpecification(@RequestBody com.demo.paymentsdemo.dto.RequestDto RequestDto)
+    // {
         
-    }
+    // }
     
     
     
