@@ -59,11 +59,5 @@ public class FilterController {
     {
         Specification<Student> searchSpecification = studentFilterSpecification.getSearchSpecification(requestDto.getSearchRequestDto());
         return new ResponseEntity<>(studentRepository.findAll(searchSpecification),HttpStatus.OK);
-    
-    }
-    
-    
-    
-
-    
+    }    
 }

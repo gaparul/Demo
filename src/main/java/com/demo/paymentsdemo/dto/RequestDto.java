@@ -1,5 +1,7 @@
 package com.demo.paymentsdemo.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class RequestDto {
 
-    private SearchRequestDto searchRequestDto;
+    private List<SearchRequestDto> searchRequestDto;
     
 }
