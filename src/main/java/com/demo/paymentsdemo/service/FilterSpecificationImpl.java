@@ -45,8 +45,23 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                 List<Predicate> predicates = new ArrayList<>();
                 for(SearchRequestDto it:searchRequestDtos)
                 {
-                    Predicate equal = criteriaBuilder.equal(root.get(it.getColumn()), it.getValue());
-                    predicates.add(equal);
+                    switch(it.getOperation())
+                    {
+                        case EQUAL:
+                            Predicate equal = criteriaBuilder.equal(root.get(it.getColumn()), it.getValue());
+                            predicates.add(equal);
+                            break;
+
+                        case LIKE:
+                            Predicate like = criteriaBuilder.like(root.get(it.getColumn()), "%" + it.getValue() + "%");
+                            predicates.add(like);
+                            break;
+                        
+                        default:
+                            throw new IllegalAccessError("Unexpected Value:");
+                    }
+                    
+                    
                 }
                 if(globalOperator.equals(GlobalOperator.AND)){
                     return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

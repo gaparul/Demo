@@ -9,5 +9,11 @@ public class SearchRequestDto {
 
     String column;
     String value;
+    private Operation operation;
+
+    public enum Operation
+    {
+        EQUAL,LIKE;
+    }
     
 }

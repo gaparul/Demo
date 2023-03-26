@@ -18,7 +18,7 @@ public class Student {
     @Column(name = "id")
     private Long id;
     
-    @Column(name="name")
+    @Column(name="name",unique = false)
     private String name;
 
     @OneToOne(fetch = FetchType.LAZY)
