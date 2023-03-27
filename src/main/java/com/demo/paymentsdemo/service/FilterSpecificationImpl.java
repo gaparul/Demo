@@ -64,6 +64,16 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                             predicates.add(in);
                             break;
                         
+                        case LESS_THAN:
+                            Predicate lessthan = criteriaBuilder.lessThan(root.get(it.getColumn()), it.getValue());
+                            predicates.add(lessthan);
+                            break;
+                        
+                        case GREATER_THAN:
+                            Predicate greaterthan = criteriaBuilder.greaterThan(root.get(it.getColumn()), it.getValue());
+                            predicates.add(greaterthan);
+                            break;
+                        
                         default:
                             throw new IllegalAccessError("Unexpected Value:");
                     }
