@@ -74,6 +74,12 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                             predicates.add(greaterthan);
                             break;
                         
+                        case BETWEEN:
+                            String[] split1 = it.getValue().split(",");
+                            Predicate between = criteriaBuilder.between(root.get(it.getColumn()), split1[0], split1[1]);
+                            predicates.add(between);
+                            break;
+                        
                         default:
                             throw new IllegalAccessError("Unexpected Value:");
                     }
