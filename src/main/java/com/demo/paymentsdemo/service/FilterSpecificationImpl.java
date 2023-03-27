@@ -79,6 +79,11 @@ public class FilterSpecificationImpl<T> implements FilterSpecification<T>{
                             Predicate between = criteriaBuilder.between(root.get(it.getColumn()), split1[0], split1[1]);
                             predicates.add(between);
                             break;
+
+                        case JOIN:
+                            Predicate join = criteriaBuilder.equal(root.join(it.getJoinTable()).get(it.getColumn()), it.getValue());
+                            predicates.add(join);
+                            break;
                         
                         default:
                             throw new IllegalAccessError("Unexpected Value:");

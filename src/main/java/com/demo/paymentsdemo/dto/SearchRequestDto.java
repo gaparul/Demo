@@ -9,11 +9,12 @@ public class SearchRequestDto {
 
     String column;
     String value;
+    String joinTable;
     private Operation operation;
 
     public enum Operation
     {
-        EQUAL,LIKE,IN, GREATER_THAN, LESS_THAN, BETWEEN;
+        EQUAL,LIKE,IN, GREATER_THAN, LESS_THAN, BETWEEN,JOIN;
     }
     
 }
